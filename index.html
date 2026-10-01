@@ -3,58 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f5f4ef" />
-  <meta name="description" content="A playful, interactive regex learning lab for curious coders." />
-  <title>Pattern Lab — Learn regex by playing</title>
+  <meta name="theme-color" content="#dce9dd" />
+  <meta name="description" content="Walk through a 3D supermarket story and learn regular expressions with Oscar and Lily." />
+  <title>Regex Market — A walk-through story</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./game.css" />
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#home" aria-label="Pattern Lab home"><span class="brand-mark">.*</span><span>pattern<span class="brand-light">lab</span></span></a>
-    <nav class="topnav" aria-label="Main navigation"><button class="nav-link active" data-view="play">Play</button><button class="nav-link" data-view="sandbox">Sandbox</button><button class="nav-link" data-view="map">Concept map</button></nav>
-    <div class="streak"><span class="streak-icon">✳</span><span id="streak-count">0</span><span class="streak-label">solved</span></div>
-  </header>
+  <div class="game-shell">
+    <header class="game-hud">
+      <a class="game-brand" href="#market" aria-label="Regex Market"><span class="brand-icon">R</span><span>regex <b>market</b></span></a>
+      <div class="quest-hud"><div class="quest-kicker">OSCAR’S SHOPPING TRIP</div><div class="quest-title" id="chapter-title">The produce aisle</div><div class="quest-progress"><div id="quest-progress-fill"></div></div></div>
+      <div class="hud-actions"><span class="chapter-count" id="chapter-count">01 / 06</span><button id="notes-open" class="notes-button"><span>▤</span> Field notes</button></div>
+    </header>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-copy"><div class="eyebrow"><span class="live-dot"></span> A STORY YOU CAN PLAY</div><h1>Help Oscar.<br><span>Decode the clues.</span></h1><p>Follow Lily’s handoffs through the supermarket and build patterns to solve each request.</p></div>
-      <div class="hero-art" aria-hidden="true"><div class="art-spark spark-a">✳</div><div class="art-spark spark-b">✦</div><div class="art-card"><span class="art-label">MATCH FOUND</span><div class="art-expression">/ <i>\d</i><b>+</b> /g</div><div class="art-line"><span>order #</span><mark>2048</mark></div><div class="art-line faint"><span>room 2B</span></div><div class="art-line"><span>item #</span><mark>17</mark></div><div class="art-doodle">⌁</div></div><div class="art-orbit"></div></div>
-    </section>
+    <main class="game-main" id="market">
+      <section class="world-viewport" id="world-viewport" aria-label="Walkable supermarket">
+        <div class="world-backdrop"></div>
+        <div class="store-sign" id="store-sign"><span>FRESH & FOUND</span><small id="aisle-name">PRODUCE · AISLE 01</small></div>
+        <div class="ceiling-light light-one"></div><div class="ceiling-light light-two"></div>
+        <div class="shelf shelf-left"><div class="shelf-header" id="shelf-header-left">FRESH PICKS</div><div class="shelf-row"><i>🍎</i><i>🍐</i><i>🥕</i><i>🥦</i><i>🍋</i></div><div class="shelf-row"><i>🍊</i><i>🥬</i><i>🍇</i><i>🍅</i><i>🥑</i></div><div class="shelf-row"><i>🍞</i><i>🥛</i><i>🧀</i><i>🥚</i><i>🧈</i></div></div>
+        <div class="shelf shelf-right"><div class="shelf-header" id="shelf-header-right">TODAY’S PICKS</div><div class="shelf-row"><i>🥫</i><i>🧃</i><i>🍪</i><i>🍯</i><i>🥣</i></div><div class="shelf-row"><i>🧴</i><i>🧻</i><i>🧼</i><i>🧽</i><i>🪥</i></div><div class="shelf-row"><i>📦</i><i>📦</i><i>📦</i><i>📦</i><i>📦</i></div></div>
+        <div class="floor"></div><div class="floor-lane lane-a"></div><div class="floor-lane lane-b"></div>
+        <div class="market-prop basket-prop"><span>🛒</span><small>Oscar’s basket</small></div>
+        <div class="market-prop crate-prop"><span>📦</span><small>Stockroom</small></div>
+        <div class="target-marker hidden" id="target-marker"><span class="marker-ring"></span><span id="target-label">Lily</span></div>
+        <div class="exit-gate hidden" id="exit-gate"><span>➜</span><small>NEXT AISLE</small></div>
 
-    <section class="view active" id="view-play">
-      <div class="section-heading"><div><div class="eyebrow muted">OSCAR’S MARKET QUEST · A REGEX STORY</div><h2>Find the pattern</h2></div><div class="level-count"><span id="level-number">01</span><span class="level-divider">/</span><span>06</span><div class="progress-track"><div id="progress-fill"></div></div></div></div>
-      <section class="story-stage" id="story-stage" aria-label="Story scene">
-        <div class="story-sky"><span class="story-sun"></span><span class="story-cloud cloud-one"></span><span class="story-cloud cloud-two"></span><span class="story-hill hill-back"></span><span class="story-hill hill-front"></span><span class="story-location" id="story-location">CHAPTER 1 · SIGNAL BEACH</span>
-          <div class="story-character nia" id="oscar-character" aria-label="Oscar, the shopper"><div class="char-shadow"></div><div class="char-body"><div class="char-arm arm-left"></div><div class="char-arm arm-right"></div><div class="char-head"><span class="char-hair"></span><span class="char-eye eye-left"></span><span class="char-eye eye-right"></span><span class="char-smile"></span><span class="char-cheek cheek-left"></span><span class="char-cheek cheek-right"></span></div><span class="char-badge">O</span></div><span class="char-name">Oscar · shopper</span></div>
-          <div class="story-character byte" id="lily-character" aria-label="Lily, the supermarket guide"><div class="char-shadow"></div><div class="robot-body"><span class="robot-antenna"></span><span class="robot-ear ear-left"></span><span class="robot-ear ear-right"></span><span class="robot-face"><i></i><i></i><b></b></span><span class="robot-panel">.*</span><span class="robot-arm robot-arm-left"></span><span class="robot-arm robot-arm-right"></span></div><span class="char-name">Lily · store guide</span></div>
+        <button class="world-character npc lily-npc" id="lily-npc" aria-label="Lily, supermarket guide">
+          <span class="npc-glow"></span><img src="./assets/characters/lily-3d.png" alt="Lily, the supermarket guide" /><span class="nameplate">Lily <small>STORE GUIDE</small></span><span class="talk-indicator">!</span>
+        </button>
+        <button class="world-character npc ravi-npc hidden" id="ravi-npc" aria-label="Ravi, stockroom specialist">
+          <span class="npc-glow"></span><img src="./assets/characters/ravi-3d.png" alt="Ravi, the stockroom specialist" /><span class="nameplate" id="specialist-name">Ravi <small>STOCKROOM</small></span><span class="talk-indicator">!</span>
+        </button>
+        <div class="world-character player" id="player" role="img" aria-label="Oscar, the shopper">
+          <span class="player-shadow"></span><img src="./assets/characters/oscar-3d.png" alt="" /><span class="nameplate">Oscar <small>YOU</small></span>
         </div>
-        <div class="dialogue-card"><div class="dialogue-meta"><span class="dialogue-chapter" id="dialogue-chapter">THE SHOPPING LIST</span><span class="dialogue-pages" id="dialogue-pages">READY</span></div><div class="speech-line"><span class="speaker-dot" id="speaker-dot">O</span><div><div class="speaker-name" id="speaker-name">OSCAR</div><p id="story-line" aria-live="polite"></p><button id="annotation-toggle" class="annotation-toggle" aria-expanded="false">What’s the clue? <span>＋</span></button><p id="story-annotation" class="story-annotation hidden" aria-live="polite"></p></div></div><div class="story-player"><span class="player-status" id="player-status">READY WHEN YOU ARE</span><div class="player-controls"><button id="story-start" class="player-button start-button">Start story <span>▶</span></button><button id="story-pause" class="player-button" disabled>Pause <span>Ⅱ</span></button><button id="story-stop" class="player-button stop-button" disabled>Stop <span>■</span></button></div></div></div>
+        <div class="walk-prompt" id="walk-prompt"><span class="keycap">E</span><span id="walk-prompt-text">Walk over to Lily</span></div>
+        <div class="scene-caption" id="scene-caption">A little regex, a big shopping trip.</div>
       </section>
-      <div class="game-layout">
-        <article class="mission-card">
-          <div class="mission-top"><span class="mission-tag"><span class="tag-dot"></span> <span id="mission-category">WARM-UP</span></span><button class="icon-button" id="hint-button" aria-label="Reveal a hint" title="Reveal a hint">?</button></div>
-          <div class="mission-body"><div class="mission-kicker" id="mission-kicker">MISSION 01</div><h3 id="mission-title">Find every digit</h3><p id="mission-prompt">A system log is full of words and numbers. Highlight each number so we can count them.</p>
-          <div class="hint-box hidden" id="hint-box"><span>💡</span><p id="hint-text"></p></div>
-          <div class="pattern-entry"><label for="pattern-input">YOUR PATTERN <span class="python-pill">Python-style</span></label><div class="input-shell"><span class="slash">/</span><input id="pattern-input" spellcheck="false" autocomplete="off" aria-label="Your regular expression" value="\d+" /><span class="slash">/</span><button id="run-button" class="run-button">Run <span>↗</span></button></div><div id="regex-error" class="regex-error" aria-live="polite"></div></div>
-          <div class="stream-heading"><span>LIVE TEXT STREAM</span><span id="match-count" class="match-count">—</span></div><div id="stream" class="stream" aria-live="polite"></div>
-          <div id="feedback" class="feedback hidden" aria-live="polite"></div>
-          <div class="mission-actions"><button class="text-button" id="example-button">Show an example <span>↗</span></button><button class="next-button hidden" id="next-button">Next mission <span>→</span></button></div>
-          <div id="example-panel" class="example-panel hidden"></div>
-          </div>
-        </article>
-        <aside class="side-column"><div class="coach-card"><div class="coach-avatar">🛒</div><div><div class="coach-name">Oscar asks. Lily redirects.</div><div class="coach-status"><span></span> you decode each clue</div></div></div><div class="learn-card"><div class="learn-head"><span class="learn-icon">⌘</span><span>THE IDEA</span></div><h4 id="idea-title">A pattern is a tiny program.</h4><p id="idea-copy">It describes what to look for. The computer checks the text one piece at a time.</p><button id="learn-more" class="learn-more">Unpack this <span>＋</span></button><div id="idea-detail" class="idea-detail hidden"></div></div><div class="progress-card"><div class="progress-title">YOUR TRAIL <span>✦</span></div><div id="trail" class="trail"></div><div class="trail-caption" id="trail-caption">Every pattern starts with one clue.</div></div></aside>
-      </div>
-    </section>
 
-    <section class="view hidden" id="view-sandbox"><div class="section-heading"><div><div class="eyebrow muted">OPEN PRACTICE</div><h2>Regex sandbox</h2></div><span class="python-pill">Python-style · JavaScript engine</span></div><div class="sandbox-card"><p class="sandbox-intro">Try any pattern on your own text. Click a token in the cheat sheet to insert it.</p><label class="field-label" for="sandbox-pattern">PATTERN</label><div class="input-shell sandbox-input"><span class="slash">/</span><input id="sandbox-pattern" spellcheck="false" placeholder="Try: [A-Z][a-z]+"/><span class="slash">/</span><button id="sandbox-run" class="run-button">Match <span>↗</span></button></div><div id="sandbox-error" class="regex-error"></div><label class="field-label" for="sandbox-text">YOUR TEXT</label><textarea id="sandbox-text" rows="4">Ada wrote Python 3.12 in 2024. Grace wrote COBOL in 1959.</textarea><div class="sandbox-output-label">MATCHES <span id="sandbox-count">—</span></div><div id="sandbox-output" class="sandbox-output">Run a pattern to see what it finds.</div></div><div class="token-library"><div class="eyebrow muted">QUICK TOKENS · CLICK TO INSERT</div><div id="token-list" class="token-list"></div></div></section>
+      <section class="dialogue-dock" id="dialogue-dock" aria-label="Character conversation">
+        <div class="dialogue-topline"><div class="speaker-id"><span class="speaker-avatar" id="speaker-avatar">O</span><div><small id="speaker-role">THE SHOPPER</small><strong id="speaker-name">Oscar</strong></div></div><div class="dialogue-state"><span class="live-led" id="live-led"></span><span id="dialogue-status">Walk up to Lily to begin</span></div><button class="dock-collapse" id="dock-collapse" aria-label="Collapse conversation">⌄</button></div>
+        <div class="dialogue-content">
+          <p class="dialogue-text" id="dialogue-text">I’ve got a shopping list and a lot to learn. Lily is just over there—let’s walk over and see how she can help.</p>
+          <div class="lesson-note hidden" id="lesson-note"><div class="note-heading"><span>✦</span><span id="note-label">ANNOTATION</span></div><p id="note-text"></p><div class="note-pattern hidden" id="note-pattern"></div><div class="note-examples" id="note-examples"></div></div>
+        </div>
+        <div class="dock-footer"><div class="conversation-progress"><div class="conversation-dots" id="conversation-dots"></div><button class="annotation-button" id="annotation-button" disabled>Show lesson note <span>＋</span></button></div><div class="story-controls"><button id="story-start" class="story-control primary"><span>▶</span> Start</button><button id="story-pause" class="story-control" disabled><span>Ⅱ</span> Pause</button><button id="story-stop" class="story-control stop-control" disabled><span>■</span> Stop</button></div></div>
+      </section>
 
-    <section class="view hidden" id="view-map"><div class="section-heading"><div><div class="eyebrow muted">THE BIG PICTURE</div><h2>From grammar to pattern</h2></div><span class="python-pill">Tap a tile to explore</span></div><p class="map-intro">A regular expression is a compact way to describe a set of strings. It sits beside grammars in the language-theory toolbox: useful for repeated shapes, while nested structure needs a more powerful grammar.</p><div class="concept-grid" id="concept-grid"></div><div class="grammar-note"><span class="note-icon">⌘</span><div><h3>Where do CFGs fit?</h3><p>Regular expressions describe regular languages. Context-free grammars (CFGs) can describe nested structures such as balanced parentheses. Python's <code>re</code> module is great for text patterns, but a parser/CFG is the right tool when nesting matters.</p><button id="grammar-example" class="text-button">See the difference <span>↗</span></button><div id="grammar-detail" class="grammar-detail hidden"></div></div></div></section>
-  </main>
-  <footer><span class="brand-mini">.*</span><span>Small clues. Big pattern energy.</span><span class="footer-right">Built for curious minds <span>✳</span></span></footer>
+      <div class="movement-hud"><div class="move-label"><span class="keycap">W A S D</span><span>Move Oscar</span></div><div class="dpad" aria-label="Movement controls"><button data-move="up" aria-label="Move up">▲</button><div><button data-move="left" aria-label="Move left">◀</button><button data-move="down" aria-label="Move down">▼</button><button data-move="right" aria-label="Move right">▶</button></div></div><button class="interact-button" id="interact-button"><span class="keycap">E</span> <span id="interact-label">Talk to Lily</span></button></div>
+
+      <div class="world-hint" id="world-hint"><span>TIP</span> Walk to a person and press <kbd>E</kbd> to talk. Use <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> or WASD to move.</div>
+      <div class="mobile-hint">Use the direction pad to walk. Tap a nearby character to talk.</div>
+    </main>
+  </div>
+
+  <div class="modal-scrim hidden" id="notes-modal" role="dialog" aria-modal="true" aria-labelledby="notes-title"><section class="field-notebook"><header><div><span class="eyebrow">OSCAR’S POCKET GUIDE</span><h2 id="notes-title">Regex field notes</h2></div><button id="notes-close" class="close-button" aria-label="Close field notes">×</button></header><p class="notebook-intro">Lily’s annotations, collected during the walk through the market.</p><div class="notes-grid" id="notes-grid"></div><div class="cfg-note"><div class="cfg-icon">⌘</div><div><h3>When the market scanner needs a bigger grammar</h3><p>Regex describes regular languages and is great for local text shapes. Context-free grammars (CFGs) handle recursive nesting, such as balanced parentheses. A parser uses a stack to match arbitrarily deep pairs; a plain regular expression has no stack.</p><code>S → (S)S | ε</code><p class="cfg-example">This CFG can describe <code>()</code>, <code>(())</code>, and <code>()()</code>.</p></div></div></section></div>
+  <div class="ending-overlay hidden" id="ending-overlay"><div class="ending-card"><span class="ending-star">✦</span><div class="eyebrow">SHOPPING TRIP COMPLETE</div><h2>Oscar found his way.<br><span>You found a new language.</span></h2><p>Walk the aisles again, or open your field notes to revisit the patterns.</p><button id="ending-notes" class="story-control primary">Open field notes</button><button id="restart-trip" class="ending-restart">Walk the market again</button></div></div>
   <div class="toast" id="toast" role="status"></div>
-  <script src="./app.js"></script>
+  <script src="./game.js"></script>
 </body>
 </html>
