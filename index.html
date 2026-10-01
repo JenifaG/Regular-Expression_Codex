@@ -20,12 +20,19 @@
 
   <main>
     <section class="hero" id="home">
-      <div class="hero-copy"><div class="eyebrow"><span class="live-dot"></span> THE FRIENDLY REGEX ARCADE</div><h1>Teach patterns<br><span>to spot patterns.</span></h1><p>Give the computer a clue. Watch it find the signal in the noise.</p></div>
+      <div class="hero-copy"><div class="eyebrow"><span class="live-dot"></span> A STORY YOU CAN PLAY</div><h1>Find the clue.<br><span>Save the signal.</span></h1><p>Travel with Nia and Byte. Learn regex by helping them read the world.</p></div>
       <div class="hero-art" aria-hidden="true"><div class="art-spark spark-a">✳</div><div class="art-spark spark-b">✦</div><div class="art-card"><span class="art-label">MATCH FOUND</span><div class="art-expression">/ <i>\d</i><b>+</b> /g</div><div class="art-line"><span>order #</span><mark>2048</mark></div><div class="art-line faint"><span>room 2B</span></div><div class="art-line"><span>item #</span><mark>17</mark></div><div class="art-doodle">⌁</div></div><div class="art-orbit"></div></div>
     </section>
 
     <section class="view active" id="view-play">
-      <div class="section-heading"><div><div class="eyebrow muted">YOUR FIRST QUEST</div><h2>Find the pattern</h2></div><div class="level-count"><span id="level-number">01</span><span class="level-divider">/</span><span>06</span><div class="progress-track"><div id="progress-fill"></div></div></div></div>
+      <div class="section-heading"><div><div class="eyebrow muted">THE LOST SIGNAL · A REGEX STORY</div><h2>Find the pattern</h2></div><div class="level-count"><span id="level-number">01</span><span class="level-divider">/</span><span>06</span><div class="progress-track"><div id="progress-fill"></div></div></div></div>
+      <section class="story-stage" id="story-stage" aria-label="Story scene">
+        <div class="story-sky"><span class="story-sun"></span><span class="story-cloud cloud-one"></span><span class="story-cloud cloud-two"></span><span class="story-hill hill-back"></span><span class="story-hill hill-front"></span><span class="story-location" id="story-location">CHAPTER 1 · SIGNAL BEACH</span>
+          <div class="story-character nia" id="nia-character" aria-label="Nia the coder"><div class="char-shadow"></div><div class="char-body"><div class="char-arm arm-left"></div><div class="char-arm arm-right"></div><div class="char-head"><span class="char-hair"></span><span class="char-eye eye-left"></span><span class="char-eye eye-right"></span><span class="char-smile"></span><span class="char-cheek cheek-left"></span><span class="char-cheek cheek-right"></span></div><span class="char-badge">N</span></div><span class="char-name">Nia</span></div>
+          <div class="story-character byte" id="byte-character" aria-label="Byte the robot"><div class="char-shadow"></div><div class="robot-body"><span class="robot-antenna"></span><span class="robot-ear ear-left"></span><span class="robot-ear ear-right"></span><span class="robot-face"><i></i><i></i><b></b></span><span class="robot-panel">.*</span><span class="robot-arm robot-arm-left"></span><span class="robot-arm robot-arm-right"></span></div><span class="char-name">Byte</span></div>
+        </div>
+        <div class="dialogue-card"><div class="dialogue-meta"><span class="dialogue-chapter" id="dialogue-chapter">THE SIGNAL IS SCRAMBLED</span><span class="dialogue-pages" id="dialogue-pages">1 / 2</span></div><div class="speech-line"><span class="speaker-dot" id="speaker-dot">N</span><div><div class="speaker-name" id="speaker-name">NIA</div><p id="story-line"></p></div><button class="dialogue-button" id="story-next" aria-label="Continue dialogue">Next <span>→</span></button></div></div>
+      </section>
       <div class="game-layout">
         <article class="mission-card">
           <div class="mission-top"><span class="mission-tag"><span class="tag-dot"></span> <span id="mission-category">WARM-UP</span></span><button class="icon-button" id="hint-button" aria-label="Reveal a hint" title="Reveal a hint">?</button></div>

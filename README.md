@@ -1,6 +1,6 @@
 # Pattern Lab
 
-A small, static regex learning arcade. No build step or server functions are required.
+A small, static regex learning story. Students travel with Nia and Byte through six animated chapters, then try each pattern themselves. No build step or server functions are required.
 
 ## Run locally
 
